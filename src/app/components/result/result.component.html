@@ -23,7 +23,7 @@
     
     <div class="row">
         <div id="results" class="col-4" *ngFor="let card of this.cards">
-            <a routerLink='card'>
+            <a routerLink='card' [state]="{data: card}">
                 <img  id="image" width="370" height="500" src="{{card.image_uris.normal}}"/>
             </a>
         </div>

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import {ScryfallApiService} from '../services/scryfall-api.service'
 
 @Component({
@@ -7,11 +8,18 @@ import {ScryfallApiService} from '../services/scryfall-api.service'
   styleUrls: ['./card.component.css']
 })
 export class CardComponent implements OnInit {
-
-  constructor(private _api: ScryfallApiService) { }
+  cardData;
+  constructor(private _api: ScryfallApiService, private router: Router) 
+  {
+    this.cardData = this.router.getCurrentNavigation().extras.state;
+    console.log('new component, card is ', this.cardData.data.name);
+   }
 
   ngOnInit(): void {
-    //this._api.getCards()
+    var data = this.cardData;
+    const card = data.data;
+    this.cardData = card
+    
   }
 
 }

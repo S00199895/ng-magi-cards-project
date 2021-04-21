@@ -1,6 +1,7 @@
 import {ScryfallApiService} from '../services/scryfall-api.service';
 import {EventEmitter} from '@angular/core';
 import { Component, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 
@@ -12,17 +13,17 @@ import { Component, OnInit, Output } from '@angular/core';
 
 export class ResultComponent implements OnInit {
 @Output() public emitter = new EventEmitter()
+
 cards = [];
 
 
-  constructor(private _api: ScryfallApiService) { }
+  constructor(private _api: ScryfallApiService, private route:Router) { }
 
   ngOnInit(): void {
 
   }
 
-  emitImageId() {
-    this.emitter.emit(this.cards);
+  navToCard(card) {
     //input into card component. it then searches again with the id,
     //returns a card and itss info, save, below is the saved on firebase
     //maybe pass the whole object instead?

@@ -1,8 +1,13 @@
-
+<div class="row align-start-items">
+  <div class="col pull-left mr-2">
+      <img width="370" height="500" src="{{cardData.image_uris.normal}}"/>
+  </div>
             <div class="col float-right">
-              <!-- <h1>{{card.name}}</h1>
-                <h3>Type - {{card.type_line}}</h3>
-                <h3>Mana Cost - {{card.mana_cost}} (CMC = {{card.cmc}})</h3>
-                <h3>Rarity - {{card.rarity}}</h3>-->
+               <h1>{{cardData['name']}}</h1>
+                <h3>Type - {{cardData['type_line']}}</h3>
+                <h3>Mana Cost - {{cardData['mana_cost']}} (CMC = {{cardData['cmc']}})</h3>
+                <h3>Rarity - {{cardData['rarity']}}</h3>
             </div>
-    <button class="btn btn-primary">Save</button>
+
+          </div>
+          <button class="btn btn-primary">Save</button>

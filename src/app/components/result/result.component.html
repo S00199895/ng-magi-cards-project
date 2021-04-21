@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="row">
+        <form>
+            <input type="search" class="form-control col-8" #search />
+        </form>
+        <button (click)="cardsOnClick(search.value)" type="submit" class="col-2 btn btn-danger">Search</button>
+        <div class="btn-group">
+            <div class="show dropdown">
+                <a class="btn btn-warning dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Colour
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item d-block" href="#">White</a>
+                    <a class="dropdown-item d-block" href="#">Blue</a>
+                    <a class="dropdown-item d-block" href="#">Black</a>
+                    <a class="dropdown-item d-block" href="#">Red</a>
+                    <a class="dropdown-item d-block" href="#">Green</a>
+                </div>
+            </div>
+        </div>
+        <button (click)="getRandomCard()" class="btn btn-success">Random Card</button>
+    </div>
+    
+    <div class="row">
+        <div id="results" class="col-4" *ngFor="let card of this.cards">
+            <a routerLink='card'>
+                <img  id="image" width="370" height="500" src="{{card.image_uris.normal}}"/>
+            </a>
+        </div>
+    </div>
+</div>

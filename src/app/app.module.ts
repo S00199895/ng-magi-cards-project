@@ -9,6 +9,10 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { SavedComponent } from './components/saved/saved.component';
 import { CardComponent } from './components/card/card.component';
+import {AngularFireModule} from '@angular/fire'
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import {environment} from 'src/environments/environment';
+import {RouterModule} from '@angular/router'
 
 
 
@@ -24,7 +28,10 @@ import { CardComponent } from './components/card/card.component';
     BrowserModule,
     HttpClientModule,
     NgbModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

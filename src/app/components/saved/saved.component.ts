@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { data } from 'jquery';
+import { Observable } from 'rxjs';
+import { FirestoreReadService } from '../services/firestore-read.service';
+import { ScryfallApiService } from '../services/scryfall-api.service';
 
 @Component({
   selector: 'app-saved',
@@ -6,10 +11,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./saved.component.css']
 })
 export class SavedComponent implements OnInit {
-
-  constructor() { }
+deckData;
+  constructor(private fsService:FirestoreReadService) {}
 
   ngOnInit(): void {
+  }
+
+  searchForDeck(name) {
+    this.fsService.getDeck(name).subscribe(deckData => {
+      this.deckData = deckData;
+    })
   }
 
 }

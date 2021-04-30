@@ -1,1 +1,6 @@
-<p>saved works!</p>
+<input type="text" placeholder="Search for your decks" #deckSearch/>
+<button (click)="searchForDeck(deckSearch.value)" type="submit" class="btn btn-success" >Search for decks</button>
+
+<div *ngFor="let card of deckData">
+    <h3>{{card.name}}</h3> 
+</div> 

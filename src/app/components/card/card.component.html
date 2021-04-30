@@ -25,12 +25,12 @@
       <input type="text" #landAmount/>
       <select #color>
         <option value="Red">Red</option>
-        <option value="Green">Red</option>
-        <option value="Blue">Red</option>
-        <option value="Black">Red</option>
-        <option value="White">Red</option>
+        <option value="Green">Green</option>
+        <option value="Blue">Blue</option>
+        <option value="Black">Black</option>
+        <option value="White">White</option>
       </select>
-      <button type="button" class="btn btn-warning">Add Land</button> 
+      <button type="button" (click)="addLand(color.value, landAmount.value)" class="btn btn-warning">Add Land</button> 
     </div>
   </div>
 

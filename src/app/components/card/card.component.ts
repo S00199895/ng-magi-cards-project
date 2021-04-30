@@ -2,6 +2,7 @@ import { APP_ID, Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {ScryfallApiService} from '../services/scryfall-api.service'
 import {AngularFirestoreCollection, AngularFirestore, CollectionReference, DocumentReference} from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 //import * as admin from 'firebase-admin';
 
 
@@ -14,6 +15,7 @@ export class CardComponent implements OnInit {
   cardData;
   decks:AngularFirestoreCollection;
   deckName;
+  allCardsFromFS: Observable<any>;
 
   constructor(private _api: ScryfallApiService, private router: Router, private firestore:AngularFirestore) 
   {
@@ -33,11 +35,14 @@ export class CardComponent implements OnInit {
     this.cardData = card
     
     this.showDecks();
-
+    this.firestore.collectionGroup
+    this.allCardsFromFS = this.firestore.collection("shapeshifter deck").snapshotChanges();
+    this.allCardsFromFS.subscribe(
+      data => console.log('\n' + data[0].payload._delegate.doc._key.path.segments[5]));
   }
 
   addLand(color, amount) {
-
+console.log("in addLand")
     //get land id from color
     const landIds = {
       green : "dfaf517f-86a1-45eb-bd71-e0bffb610396",
@@ -67,9 +72,14 @@ export class CardComponent implements OnInit {
 
     var landCard = this._api.getCards("", color);
 
+    console.log(JSON.parse(JSON.stringify(landCard)))
+    //NEED TO ACCESS THIS ,ETHOD  
+    //get select to work ewith
+
     for (let i = 0; i < amount; i++) {
-      this.firestore.collection(this.deckName).add(landCard);
-      
+      this.firestore.collection("giant deck").add(JSON.parse(JSON.stringify(landCard)));
+      console.log(this.firestore.collection(this.deckName).add(landCard));
+      console.log("added land " + i);
     }
   }
 

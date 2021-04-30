@@ -3,7 +3,10 @@ import {EventEmitter} from '@angular/core';
 import { Component, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 
-
+//Implement the Sort by button
+//try not to add a 3rd parameter to the api method. itll be an effort
+//maybe concatenate or format the search query parameter to do include the sorting
+//look at report to see when I need to start it
 
 @Component({
   selector: 'app-result',
@@ -24,9 +27,6 @@ cards = [];
   }
 
   navToCard(card) {
-    //input into card component. it then searches again with the id,
-    //returns a card and itss info, save, below is the saved on firebase
-    //maybe pass the whole object instead?
   }
 
   cardsOnClick(query:string) {
@@ -34,7 +34,6 @@ cards = [];
     this._api.getCards(searchParam, query).subscribe((data) => {
       console.log(data);
       this.cards = data['data']
-      console.log(this.cards.length)
 
     });
   }
@@ -42,10 +41,7 @@ cards = [];
   getRandomCard() : void {
     const rand = "random";
     this._api.getCards("", rand).subscribe((data) => {
-      console.log(data);
-      console.log(this.cards);
       this.cards[0] = data
-      console.log(this.cards.length)
     });
   }
 

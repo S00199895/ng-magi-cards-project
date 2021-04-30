@@ -12,7 +12,7 @@ import { ScryfallApiService } from '../services/scryfall-api.service';
 })
 export class SavedComponent implements OnInit {
 deckData;
-  constructor(private fsService:FirestoreReadService) {}
+  constructor(private fsService:FirestoreReadService, private _afs:AngularFirestore) {}
 
   ngOnInit(): void {
   }
@@ -21,6 +21,11 @@ deckData;
     this.fsService.getDeck(name).subscribe(deckData => {
       this.deckData = deckData;
     })
+  }
+
+  deleteCard(cardName, deckName) {
+    //deleting all cards in a deck deletes the deck
+    this._afs.collection(deckName).doc(cardName).delete()
   }
 
 }

@@ -1,28 +1,39 @@
 <div class="container">
+    <h1 class="display-4">Search for Magic Cards</h1>
+        <blockquote class="blockquote">
+            <p class="lead">This site acts as an engine for searching Magic: The Gathering Cards. Select what to 
+                sort ascending or descending, and search for a card. You can also select a random card. Click on
+                 a card for further details.
+            </p>
+        </blockquote>
     <div class="row">
-        <form>
-            <input type="search" class="form-control col-8" #search />
-        </form>
-        <button (click)="cardsOnClick(search.value)" type="submit" class="col-2 btn btn-danger">Search</button>
-        <div class="btn-group">
-            <div class="show dropdown">
-                <a class="btn btn-light dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Sort By
-                </a>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item d-block" href="#">Name</a>
-                    <a class="dropdown-item d-block" href="#">Mana Cost</a>
-                    <a class="dropdown-item d-block" href="#">Colour</a>
-                    <a class="dropdown-item d-block" href="#">Rarity</a>
-                    <a class="dropdown-item d-block" href="#">Date Released</a>
-                </div>
+        <div class="input-group mx-auto">
+            <input placeholder="Search for card keywords or names. E.g. 'Teferi', 'vampire'" type="search" onfocus="this.value=''" class="form-control col-8 mx-1 mb-2" #search />
+            <button (click)="cardsOnClick(search.value)" type="submit" class="col-2 btn btn-outline-danger">Search</button>
+        </div>
+        <div class="btn-group m-2">
+            <select id="selectBar" class="form-select form-select-md" aria-label="Default select example">
+                <option value="name" selected>Name</option>
+                <option value="rarity">Rarity</option>
+                <option value="cmc">Mana Cost</option>
+                <option value="color">Colour</option>
+                <option value="released">Date Released</option>
+            </select>
+            <div class="btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-outline-secondary">
+                    <input id="sortBtn" type="checkbox" autocomplete="off"> 
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sort-up" viewBox="0 0 16 16">
+                        <path d="M3.5 12.5a.5.5 0 0 1-1 0V3.707L1.354 4.854a.5.5 0 1 1-.708-.708l2-1.999.007-.007a.498.498 0 0 1 .7.006l2 2a.5.5 0 1 1-.707.708L3.5 3.707V12.5zm3.5-9a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zM7.5 6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zm0 3a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z"/>
+                    </svg>
+                </label>
             </div>
         </div>
-        <button (click)="getRandomCard()" class="btn btn-success">Random Card</button>
+
+        <button (click)="getRandomCard()" class="col-2 mb-2 btn btn-outline-success">Random Card</button>
     </div>
     
-    <div class="row">
-        <div id="results" class="col-4" *ngFor="let card of this.cards">
+    <div class="row ">
+        <div id="results" class="col-4 p-2 " *ngFor="let card of this.cards">
             <a routerLink='card' [state]="{data: card}">
                 <img  id="image" width="370" height="500" src="{{card.image_uris.normal}}"/>
             </a>

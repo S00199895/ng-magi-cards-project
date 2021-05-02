@@ -12,14 +12,19 @@ import { ScryfallApiService } from '../services/scryfall-api.service';
 })
 export class SavedComponent implements OnInit {
 deckData;
+
   constructor(private fsService:FirestoreReadService, private _afs:AngularFirestore) {}
 
   ngOnInit(): void {
   }
 
+  //consider naming land documents so that they're always at the bottom
+  //of the collection in the deck
+
   searchForDeck(name) {
     this.fsService.getDeck(name).subscribe(deckData => {
       this.deckData = deckData;
+      
     })
   }
 

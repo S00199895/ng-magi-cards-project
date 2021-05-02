@@ -1,37 +1,62 @@
 <div class="container">
+  <h1 class="display-4">Save Magic Cards</h1>
+        <blockquote class="blockquote">
+            <p class="lead">This page lets you save your selected card to a deck and add land to 
+              said deck.
+            </p>
+        </blockquote>
   <div class="row align-start-items">
     <div class="col pull-left mr-2">
         <img width="370" height="500" src="{{cardData.image_uris.normal}}"/>
+        <p class="lead"></p>
+        <input class="form-control col-9 m-1" type="text" placeholder="Enter a deck name, new or existing. e.g. 'blue deck'" #deckName/>
+        <button (click)="saveCard(cardData, deckName.value)" class="btn btn-outline-primary col-2 mb-1">Save</button>
+      
+          <div class="row mb-3">
+            <input class="form-control col-2 mr-1" type="text" #landAmount/>
+            <select class="form-select form-select-md col-3 mr-1" id="landSelect">
+              <option value="red">Red</option>
+              <option value="green">Green</option>
+              <option value="blue">Blue</option>
+              <option value="black">Black</option>
+              <option value="white">White</option>
+            </select>
+            <button type="button" (click)="addLand(landAmount.value, deckName.value)" class="btn btn-outline-warning col-3">Add Land</button> 
+          </div>
     </div>
-          <div class="col float-right">
-            <h1>{{cardData['name']}}</h1>
-              <h3>Type - {{cardData['type_line']}}</h3>
-              <h3>Mana Cost - {{cardData['mana_cost']}} (CMC = {{cardData['cmc']}})</h3>
-              <h3>Rarity - {{cardData['rarity']}}</h3>
+          <div class="col float-right bg-secondary p-3 m-1 border border-primary">
+            <div>
+              <h1 class="display-4">{{cardData['name']}}</h1>
+              <h3 class="lead">Type - {{cardData['type_line']}}</h3>
+              <h3 class="lead">Mana Cost - {{cardData['mana_cost']}} (CMC = {{cardData['cmc']}})</h3>
+              <h3 class="lead">Rarity - {{cardData['rarity']}}</h3>
+            </div>
+            <div>
+              <p>
+                <button class="btn btn-outline-light m-1" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                  Help
+                </button>
+              </p>
+              <div class="collapse" id="collapseExample">
+                <dt class="col-sm-3 text-truncate h5">Type</dt>
+                <dd class="col-sm-9 lead">Discerns the type of card or creature it is. You should consider
+                  <b>adding cards of similar type to the same deck</b> for synergies in-game. E.g. 
+                  One would add many vampires to a vampire deck.</dd>
+                <dt class="col-sm-3 text-truncate h5">Mana Cost</dt>
+                <dd class="col-sm-9 lead">A deck should ideally contain a <b>large amount of 3 or 4 cost</b> cards, 
+                  a lower number of 1 and 2 cost cards, and a lower number of 5-6+ cost cards. Converted 
+                  Mana Cost is the total number of mana needed to play a card. (4)(B)(B) means you need <b>4 
+                  of any colour mana to play it and 2 blue mana.</b>
+                </dd>
+                <dt class="col-sm-3 text-truncate h5">Rarity</dt>
+                <dd class="col-sm-9 lead">The rarities include <b>Common, Uncommon, Rare, and Mythic Rare</b>. The higher
+                  rarity a card is, the more powerful it will be, though it may also have a higher mana cost.
+                </dd>
+              </div>
+            </div>
           </div>
 
   </div>
-  <!-- Ideally this needs to be a dropdown combo box with document names -->>
-  <input type="text" placeholder="Which deck" #deckName/>
-  <button (click)="saveCard(cardData, deckName.value)" class="btn btn-primary">Save</button>
 
-  <div class="row">
-    <input class="col-6" type="text" #deckName/>
-    <button (click)="newDeck(deckName.value)" class="col-3 btn btn-danger">Create a deck</button>
-  </div>
-
-  <div class="row">
-    <div>
-      <input type="text" #landAmount/>
-      <select #color>
-        <option value="Red">Red</option>
-        <option value="Green">Green</option>
-        <option value="Blue">Blue</option>
-        <option value="Black">Black</option>
-        <option value="White">White</option>
-      </select>
-      <button type="button" (click)="addLand(color.value, landAmount.value)" class="btn btn-warning">Add Land</button> 
-    </div>
-  </div>
 
 </div>

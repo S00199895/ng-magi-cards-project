@@ -1,15 +1,17 @@
-<!--<app-result></app-result>-->
-<div class="container">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+<div class="container bg-dark text-white opac border border-success">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
                 <a class="nav-link" routerLink="" routerLinkActive="active">Home</a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" routerLink="saved">Saved</a>
+                <a class="nav-link" routerLink="saved" routerLinkActive="inactive">Saved</a>
             </li>
         </ul>
     </nav>
+        
+    
+        <router-outlet></router-outlet>
 </div>
-<router-outlet></router-outlet>

@@ -1,25 +1,31 @@
-<input type="text" placeholder="Search for your decks" #deckSearch/>
-<button (click)="searchForDeck(deckSearch.value)" type="submit" class="btn btn-success" >Search for decks</button>
-
-<h3>Deck - {{deckData[0].payload._delegate.doc._key.path.segments[5]}}</h3> 
-
+<h1 class="display-4">Search your Decks</h1>
+    <blockquote class="blockquote">
+        <p class="lead">Use the search bar below to search for your decks. E.g. 'blue deck', 'red deck', 
+            or any other deck names you have previously created.
+        </p>
+    </blockquote>
+<div class="row">
+    <input class="form-control col-8 mx-1" type="text" placeholder="Search for your decks" #deckSearch/>
+    <button (click)="searchForDeck(deckSearch.value)" type="submit" class="btn btn-outline-success col-2" >Search for decks</button>
+</div>
+<h3 class="display-3">Deck - {{deckData[0].payload._delegate.doc._key.path.segments[5]}}</h3> 
+<p class="lead">{{deckData.length}} card(s)</p>
 <div class="container">
     <div class="row">
-        <div class="card col-4" *ngFor="let card of deckData">
-                <!-- Its to do with whas inside the ng for -->
+        <div class="card bg-dark border-secondary col-4" *ngFor="let card of deckData">
             <img [src]="
             card.payload._delegate.doc._document.data.partialValue.mapValue.fields.image_uris.mapValue.fields.normal.stringValue"
                 class="card-img-top"/>
             <h5 class="card-title mt-2">{{card.payload._delegate.doc._document.data.partialValue.mapValue.fields.name.stringValue}}</h5>
 
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">Type - {{card.payload._delegate.doc._document.data.partialValue.mapValue.fields.type_line.stringValue}}</li>
-                <li class="list-group-item">Converted Mana Cost - {{card.payload._delegate.doc._document.data.partialValue.mapValue.fields.cmc.stringValue}}</li>
-                <li class="list-group-item">Rarity - {{card.payload._delegate.doc._document.data.partialValue.mapValue.fields.rarity.stringValue}}</li>
+                <li class="list-group-item bg-dark lead">Type - {{card.payload._delegate.doc._document.data.partialValue.mapValue.fields.type_line.stringValue}}</li>
+                <li class="list-group-item bg-dark lead">Converted Mana Cost - {{card.payload._delegate.doc._document.data.partialValue.mapValue.fields.cmc.integerValue}}</li>
+                <li class="list-group-item bg-dark lead">Rarity - {{card.payload._delegate.doc._document.data.partialValue.mapValue.fields.rarity.stringValue}}</li>
             </ul>
             <div class="card-body">
                 
-                <button class="btn btn-warning card-link" (click)="deleteCard(card.payload._delegate.doc._document.data.partialValue.mapValue.fields.name.stringValue, deckData[0].payload._delegate.doc._key.path.segments[5])">Remove</button>
+                <button class="btn btn-warning card-link" (click)="deleteCard(card.payload._delegate.doc._key.path.segments[6], deckData[0].payload._delegate.doc._key.path.segments[5])">Remove</button>
             </div>
         </div>
     </div>

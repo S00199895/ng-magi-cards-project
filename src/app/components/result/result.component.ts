@@ -3,11 +3,6 @@ import {EventEmitter} from '@angular/core';
 import { Component, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 
-//Implement the Sort by button
-//try not to add a 3rd parameter to the api method. itll be an effort
-//maybe concatenate or format the search query parameter to do include the sorting
-//look at report to see when I need to start it
-
 @Component({
   selector: 'app-result',
   templateUrl: './result.component.html',
@@ -15,7 +10,6 @@ import { Router } from '@angular/router';
 })
 
 export class ResultComponent implements OnInit {
-@Output() public emitter = new EventEmitter()
 
 cards = [];
 
@@ -26,11 +20,29 @@ cards = [];
 
   }
 
-  navToCard(card) {
-  }
 
   cardsOnClick(query:string) {
-    const searchParam = "search?q="
+    //get the selected value
+    const selectBar = document.getElementById('selectBar') as HTMLSelectElement;
+    var selectedOption = selectBar.value;
+
+    const sortBtn = document.getElementById('sortBtn') as HTMLInputElement;
+    var IsChecked = sortBtn.checked;
+
+    let searchParam
+
+    
+
+    if (IsChecked) 
+    {
+      searchParam = "search?order=" + selectedOption + "&dir=asc" + "&q=";
+    } 
+    else 
+    {
+      searchParam = "search?order=" + selectedOption + "&dir=desc" + "&q=";
+    }
+
+    console.log(searchParam + query);
     this._api.getCards(searchParam, query).subscribe((data) => {
       console.log(data);
       this.cards = data['data']

@@ -12,8 +12,9 @@
         <input class="form-control col-9 m-1" type="text" placeholder="Enter a deck name, new or existing. e.g. 'blue deck'" #deckName/>
         <button (click)="saveCard(cardData, deckName.value)" class="btn btn-outline-primary col-2 mb-1">Save</button>
       
+        
           <div class="row mb-3">
-            <input class="form-control col-2 mr-1" type="text" #landAmount/>
+            <input placeholder="e.g. 22, 24" class="form-control col-3 mr-1" type="text" #landAmount/>
             <select class="form-select form-select-md col-3 mr-1" id="landSelect">
               <option value="red">Red</option>
               <option value="green">Green</option>
@@ -22,7 +23,11 @@
               <option value="white">White</option>
             </select>
             <button type="button" (click)="addLand(landAmount.value, deckName.value)" class="btn btn-outline-warning col-3">Add Land</button> 
+            <p class="col-10">Ideally, decks contain 20-24 land. Depending on the mana cost, 
+              you may have more or less than this.
+            </p>
           </div>
+         
     </div>
           <div class="col float-right bg-secondary p-3 m-1 border border-primary">
             <div>
